@@ -1,0 +1,22 @@
+{
+	"items": [
+		{
+			"id": 1,
+			"title": "headphones",
+			"price": "$15,65",
+			"inStock": true
+		},
+		{
+			"id": 2,
+			"title": "Samsung smartTV 42'",
+			"price": "$499,98",
+			"inStock": true
+		},
+		{
+			"id": 3,
+			"title": "PS4",
+			"price": "$423,77",
+			"inStock": true
+		}
+	]
+}
