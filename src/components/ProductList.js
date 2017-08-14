@@ -2,25 +2,26 @@ import React from 'react';
 
 import Product from './Product';
 
-const ProductList = ({ items, removeItem, quantifier }) => {
+const ProductList = ({ products, removeProduct, quantyFier }) => {
 	return (
-		<div className="l_product-list">
+		<div className="l_proudct-list">
 			<ul>
-				{ items.map(item => (
+				{ 
+					products.map(product => (
 						<li 
-							key={ item.id }
+							key={ product.id } 
 						>
 							<Product 
-								removeItem={ removeItem }
-								quantifier={ quantifier }
-								item={ item } 
-							/>	
+								quantyFier={ quantyFier }
+								removeProduct={ removeProduct }
+								product={ product }
+							/>
 						</li>
 					))
 				}
 			</ul>
 		</div>
 	)
-}	
+}
 
-export default ProductList;	
+export default ProductList;

@@ -1,45 +1,46 @@
 import React from 'react';
 
-const Product = ({ item, quantifier, removeItem }) => {
+const Product = ({ product, removeProduct, quantyFier }) => {
 	return (
-		<div className="l_product-item">
-			<div className="l_item-description">
-				<strong>id# :</strong>
+		<div className="l_product">
+			<div className="l_product-desc">
+				<strong>ID#: </strong> { product.id }
 				{ ' ' }
-				<span>
-					{ item.id }
-				</span>
+				<span>{ product.title }</span>
 				{ ' ' }
-				<span>{ item.title }</span>
-			</div>
-			
-			<div className="l_item-controlls">
+				<span>Price :</span>
+				{ ' ' }
+				<strong>${ product.price }</strong>
+				{ ' '}
 				<button 
-					onClick={() => quantifier(item.id, +1)}
+					onClick={ () => removeProduct(product.id) }
+					type="button" 
+				>
+					x
+				</button>
+			</div>
+
+			<div className="l_product-controls">
+				<button 
+					type="button"
+					onClick={() => quantyFier(product.id, +1)}
 				>
 					+
-				</button>
+				</button>	
 				{ ' ' }
-				<strong>{ item.qty }</strong>
+				<strong>{ product.qty }</strong>
 				{ ' ' }
-				<button
-					disabled={ item.qty <= 1 ? true : false } 
-					onClick={() => quantifier(item.id, -1)}
+				<button 
+					type="button"
+					disabled={ product.qty <= 1 ? true : false }
+					onClick={() => quantyFier(product.id, -1)}
 				>
 					-
-				</button>
-
-				{ ' ' }
-
-				<button 
-					onClick={ () => removeItem(item.id) }
-				>
-					X
-				</button>
+				</button>	
 			</div>
 
 		</div>
-	)
+	);
 }
 
 export default Product;

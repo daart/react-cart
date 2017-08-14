@@ -1,77 +1,99 @@
 import React, { Component } from 'react';
 
 // components
-import Product from './Product';
-import AddItemForm from './Form';
-import Totals from './Totals';
 import ProductList from './ProductList';
+import NewProductForm from './NewProductForm';
+import Totals from './Totals';
 
 class Root extends Component {
 	state = {
-		items: [
+		products: [
 			{
-				id: ''+ Math.random() * 10,
-				title: '42" sony samartTV',
-				qty: 1,
-				price: 499.98
+				id: '' + Math.random() * 10,
+				title: '42" Samsung smartTV',
+				price: 699.99,
+				qty: 1
 			},
 			{
-				id: ''+ Math.random() * 10,
-				title: 'haedset Phillips',
-				qty: 2,
-				price: 49.95
+				id: '' + Math.random() * 10,
+				title: 'headSet Phillips',
+				price: 39.95,
+				qty: 2
 			},
 			{
-				id: ''+ Math.random() * 10,
-				title: 'mcbook pro 13" retina (2017)',
-				qty: 1,
-				price: 1399.99
+				id: '' + Math.random() * 10,
+				title: 'GTX-980 MSI videoCard',
+				price: 499.99,
+				qty: 1
+			},
+			{
+				id: '' + Math.random() * 10,
+				title: 'mcBook pro 13" retina (2017)',
+				price: 1499.49,
+				qty: 1
 			}
 		]
-	};
-
-	quantifier(id, dx) {
+	}
+	
+	clearCart = () => {
 		this.setState({
-			items: this.state.items.map(item => ({ ...item, qty: item.id === id ? item.qty += dx : item.qty }))
-		});
+			products: []
+		})
 	}
 
-	removeItem(id) {
-		this.setState({
-			items: this.state.items.filter(item => item.id !== id) 
-		});
-	}
-
-	addNewItem(newItem) {
-		console.log(newItem);
+	addNewItem = ({ qty, title, price }) => {
 
 		this.setState({
-			items: [
-			...this.state.items,
-			{...newItem, id: '' + Math.random() * 10 }  
+			products: [
+				...this.state.products,
+				{
+					id: '' + Math.random() * 10,
+					qty,
+					title,
+					price
+				}
 			]
 		})
 	}
 
+	removeProduct = (id) => {
+		this.setState({
+			products: this.state.products.filter(product => product.id !== id)
+		})
+	}
+
+	quantyFier = (id, dx) => {
+		this.setState({
+			products: this.state.products.map(product => (
+				{ ...product, qty: product.id === id ? product.qty += dx : product.qty }
+			))
+		})
+	}
+
 	render() {
-		let { items } = this.state;
+		let { products } = this.state;
 
 		return (
 			<div className="l_wrapper">
-				<AddItemForm 
-					addNewItem={ this.addNewItem.bind(this) }
+
+				<NewProductForm
+					addNewItem={ this.addNewItem }					 
 				/>
-				
 				<ProductList 
-					items={ items } 
-					removeItem={ this.removeItem.bind(this) }
-					quantifier={ this.quantifier.bind(this) }
+					products={ products }
+					removeProduct={ this.removeProduct }
+					quantyFier={ this.quantyFier }
 				/>
 				
 				<Totals 
-					items={ items }
+					products={ products } 
 				/>
 
+				<button 
+					onClick={ this.clearCart }
+				>
+					Clear Cart
+				</button>
 			</div>
 		)
 	}
